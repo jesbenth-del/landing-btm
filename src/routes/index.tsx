@@ -23,7 +23,7 @@ import {
   Users,
 } from "lucide-react";
 
-const FAQ_ITEMS = [
+export const FAQ_ITEMS = [
   {
     question: "¿Necesito experiencia previa en trading?",
     answer:
