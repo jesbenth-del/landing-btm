@@ -23,7 +23,7 @@ import {
   Users,
 } from "lucide-react";
 
-const FAQ_ITEMS = [
+export const FAQ_ITEMS = [
   {
     question: "¿Necesito experiencia previa en trading?",
     answer:
@@ -245,7 +245,7 @@ function Hero() {
               data-hero-cta=""
               className="group inline-flex items-center justify-center gap-2 rounded-md bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
             >
-              Aplicar para Mentoría
+              Reserva tu cupo
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </a>
           </div>
