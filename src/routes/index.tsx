@@ -25,29 +25,33 @@ import {
 
 export const FAQ_ITEMS = [
   {
-    question: "¿Necesito experiencia previa en trading?",
+    question: "¿Qué es la Sesión Cero BTM?",
     answer:
-      "No es imprescindible, pero sí ayuda haber explorado el mercado antes. Lo importante es que quieras dejar de acumular conceptos sueltos y construir un marco estructurado para operar Forex, Oro e Índices con criterio.",
+      "Es una sesión gratuita para entender cómo vemos el mercado y conocer el enfoque BTM antes de decidir si quieres avanzar con nosotros.",
   },
   {
-    question: "¿Qué diferencia hay entre el Workshop y la Mentoría?",
-    answer:
-      "El Workshop Especializado es una formación intensiva centrada en las 4 leyes estructurales para validar zonas de alta probabilidad. La Mentoría Personalizada es un acompañamiento 1:1 con diagnóstico individual, revisión continua de análisis y seguimiento de tu operativa.",
+    question: "¿La Sesión Cero es gratuita?",
+    answer: "Sí. La Sesión Cero BTM es una sesión gratuita en vivo.",
   },
   {
-    question: "¿Dan señales de trading o prometen rentabilidad?",
+    question: "¿Necesito experiencia previa?",
     answer:
-      "No. BTM Academy es una marca educativa. No vendemos señales ni garantizamos rentabilidades. Enseñamos a interpretar el mercado con estructura, contexto y validación para que desarrolles criterio propio.",
+      "No necesitas experiencia previa. Solo curiosidad por entender el mercado con más claridad y dejar de acumular conceptos aislados.",
   },
   {
-    question: "¿Qué mercados cubre la metodología?",
+    question: "¿Puedo asistir si ya conozco Smart Money, ICT o Price Action?",
     answer:
-      "La metodología se aplica a Forex, Oro (XAUUSD) e Índices. El enfoque es conectar estructura, contexto y validación en cualquiera de estos mercados, no depender de indicadores aislados ni de estrategias memorizadas.",
+      "Sí. La Sesión Cero puede ayudarte a conectar lo que ya conoces dentro de un marco de contexto, estructura y validación.",
   },
   {
-    question: "¿Cómo puedo aplicar o pedir más información?",
+    question: "¿BTM da señales?",
     answer:
-      "Completa el formulario de contacto al final de esta página. Te responderemos con la opción que mejor encaje con tu momento actual: Workshop, Mentoría o ambos.",
+      "No. BTM enseña a interpretar el mercado y desarrollar criterio propio; no vende señales ni promete rentabilidad.",
+  },
+  {
+    question: "¿Cuál es la diferencia entre Sesión Cero y Mentoría?",
+    answer:
+      "La Sesión Cero es el primer paso gratuito para conocer el enfoque BTM. La Mentoría es un acompañamiento personalizado 1:1 para aplicar ese enfoque a tu operativa.",
   },
 ] as const;
 
@@ -98,11 +102,13 @@ function Index() {
       <main>
         <Hero />
         <Problem />
+        <ZeroSession />
         <Philosophy />
         <Difference />
         <Method />
         <Testimonials />
         <StatementBreak />
+        <ZeroSessionReminder />
         <Programs />
         <LeadForm />
         <FAQ />
@@ -170,7 +176,7 @@ function Nav() {
           href="#formulario"
           className="hidden items-center gap-2 rounded-md bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground transition-opacity hover:opacity-90 md:inline-flex"
         >
-          Aplicar <ArrowRight className="h-3.5 w-3.5" />
+              Sesión Cero <ArrowRight className="h-3.5 w-3.5" />
         </a>
 
         {/* Mobile: hamburger toggle */}
@@ -205,7 +211,7 @@ function Nav() {
             onClick={() => setOpen(false)}
             className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-md bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
           >
-            Aplicar ahora <ArrowRight className="h-4 w-4" />
+            Reservar mi lugar <ArrowRight className="h-4 w-4" />
           </a>
         </div>
       )}
@@ -236,8 +242,7 @@ function Hero() {
             Entiende lo que <Mark>realmente</Mark> mueve el mercado.
           </h1>
           <p className="mt-6 max-w-xl text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg">
-            Deja de acumular conceptos aislados. Aprende a conectar estructura, contexto y
-            validación para tomar decisiones con criterio en Forex, Oro e Índices.
+            Deja de acumular conceptos aislados. Aprende a conectar contexto, estructura y validación para tomar decisiones con mayor claridad en Forex, Oro e Índices.
           </p>
           <div className="mt-10">
             <a
@@ -245,7 +250,7 @@ function Hero() {
               data-hero-cta=""
               className="group inline-flex items-center justify-center gap-2 rounded-md bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
             >
-              Reserva tu cupo
+              Reservar mi lugar
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </a>
           </div>
@@ -300,12 +305,12 @@ function Stat({ label, value }: { label: string; value: string }) {
 
 function Problem() {
   const items = [
-    "Has visto cientos de videos de trading.",
-    "Conoces muchos conceptos pero sigues confundido.",
-    "Cada mentor enseña algo diferente.",
-    "Tu análisis cambia constantemente.",
-    "Sientes que sabes cosas pero no tienes claridad.",
-    "Te cuesta conectar todas las piezas.",
+    "Tienes muchos conceptos pero no sabes conectarlos.",
+    "Cambias constantemente de metodología.",
+    "Recibes información contradictoria.",
+    "Buscas entradas constantemente.",
+    "Operas demasiado en temporalidades bajas.",
+    "No sabes interpretar el contexto.",
   ];
   return (
     <section id="problema" className="border-b border-border/30 sm:border-border/60 bg-card/20 py-10 sm:py-20">
@@ -332,6 +337,28 @@ function Problem() {
   );
 }
 
+function ZeroSession() {
+  return (
+    <section className="border-b border-border/30 sm:border-border/60 py-10 sm:py-20">
+      <div className="mx-auto max-w-6xl px-6">
+        <ProgramCard
+          tag="Sesión gratuita en vivo"
+          title="Sesión Cero BTM"
+          description="Antes de aprender más, entiende cómo vemos el mercado. Una sesión gratuita para traders que están cansados de acumular conceptos, cambiar de metodología y buscar entradas constantemente sin tener una estructura clara para interpretar el mercado."
+          bullets={[
+            "Contexto antes que entrada — Entiende por qué una operación no empieza buscando una entrada.",
+            "Estructura antes que señal — Aprende a conectar la información del mercado antes de tomar una decisión.",
+            "Selectividad antes que sobreoperación — Descubre por qué en BTM no buscamos operar cada movimiento del mercado.",
+          ]}
+          cta="Quiero asistir a Sesión Cero"
+          highlight={false}
+          availability={`Próxima sesión: ${getNextSaturdayLabel()}`}
+        />
+      </div>
+    </section>
+  );
+}
+
 /* ---------- Philosophy ---------- */
 
 function Philosophy() {
@@ -346,12 +373,10 @@ function Philosophy() {
             </h2>
             <div className="mt-8 space-y-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
               <p>
-                La mayoría de traders no fracasa por falta de contenido. Fracasa porque aprende
-                conceptos aislados sin entender cómo funcionan juntos.
+                Probablemente ya has consumido suficiente información sobre trading.
               </p>
               <p className="text-foreground/90">
-                En BTM Academy enseñamos a conectar esas piezas dentro de una estructura lógica y
-                repetible.
+                El problema es que muchos conceptos se enseñan de forma aislada y terminan generando más confusión que claridad. En BTM no se trata de aprender más conceptos. Se trata de entender cuáles importan, cómo se relacionan y cuándo realmente tienen sentido.
               </p>
             </div>
             <blockquote className="mt-10 border-l-2 border-primary pl-5 text-lg font-medium tracking-tight">
@@ -408,18 +433,21 @@ function FlowDiagram() {
 
 function Difference() {
   const negative = [
-    "Aprendes conceptos por separado.",
-    "Saltas de una estrategia a otra.",
-    "Memorizas nombres sin entender el contexto.",
-    "Dependes de indicadores o señales.",
-    "Terminas con más información pero menos claridad.",
+    "Más conceptos.",
+    "Más señales.",
+    "Más confirmaciones.",
+    "Más operaciones.",
+    "Buscar entradas constantemente.",
+    "Cambiar de metodología cuando algo no funciona.",
   ];
   const positive = [
-    "Aprendes a conectar todas las piezas.",
-    "Entiendes el contexto antes de buscar entradas.",
-    "Desarrollas criterio propio.",
-    "Tomas decisiones con lógica estructurada.",
-    "Construyes una metodología que puedes repetir.",
+    "Contexto.",
+    "Estructura.",
+    "Validación.",
+    "Selección.",
+    "Paciencia.",
+    "Gestión.",
+    "Ejecución.",
   ];
   return (
     <section className="border-b border-border/30 sm:border-border/60 py-10 sm:py-20">
@@ -486,7 +514,7 @@ function Difference() {
 
         <div className="mt-10 sm:mt-14 border-t border-border/60 pt-8 sm:pt-12 text-center">
           <p className="mx-auto max-w-3xl text-balance text-2xl font-medium leading-snug tracking-tight sm:text-3xl lg:text-4xl">
-            Cuando entiendes el <Mark>contexto,</Mark>
+            No enseñamos a buscar más <Mark>entradas.</Mark> Enseñamos a entender cuándo una entrada tiene sentido.
             <br className="hidden sm:block" /> las entradas dejan de ser una{" "}
             <Mark>adivinanza.</Mark>
           </p>
@@ -502,23 +530,23 @@ function Method() {
   const steps = [
     {
       icon: LineChart,
-      title: "Comprender la estructura del mercado.",
-      desc: "Identifica el esqueleto del precio antes de mirar cualquier indicador.",
+      title: "Entender",
+      desc: "Interpretar el contexto antes de pensar en una entrada.",
     },
     {
       icon: Compass,
-      title: "Interpretar correctamente el contexto.",
-      desc: "Lee el momento del mercado para no operar contra la narrativa dominante.",
+      title: "Conectar",
+      desc: "Dejar de estudiar conceptos aislados y entender cómo se relacionan.",
     },
     {
       icon: Target,
-      title: "Validar zonas de alta probabilidad.",
-      desc: "Aplica filtros estructurales para confirmar dónde merece la pena operar.",
+      title: "Validar",
+      desc: "Diferenciar una zona interesante de una oportunidad realmente válida.",
     },
     {
       icon: ShieldCheck,
-      title: "Tomar decisiones con criterio.",
-      desc: "Ejecuta con un proceso definido, no con impulsos ni sesgos.",
+      title: "Ejecutar",
+      desc: "Tomar decisiones mediante un proceso definido, sin perseguir el mercado.",
     },
   ];
   return (
@@ -687,6 +715,24 @@ function TrustStats() {
   );
 }
 
+function ZeroSessionReminder() {
+  return (
+    <section className="border-b border-border/30 sm:border-border/60 py-10 sm:py-20">
+      <div className="mx-auto max-w-4xl px-6 text-center">
+        <h2 className="text-balance text-3xl font-medium tracking-tight sm:text-4xl">
+          ¿Quieres conocer el <Mark>enfoque BTM?</Mark>
+        </h2>
+        <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
+          Da el primer paso antes de decidir si BTM es para ti.
+        </p>
+        <a href="#formulario" className="mt-8 inline-flex items-center justify-center gap-2 rounded-md bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90">
+          Reservar mi lugar <ArrowRight className="h-4 w-4" />
+        </a>
+      </div>
+    </section>
+  );
+}
+
 /* ---------- Programs ---------- */
 
 function getNextSaturdayLabel(): string {
@@ -712,23 +758,10 @@ function Programs() {
       <div className="mx-auto max-w-6xl px-6">
         <SectionLabel>Programas</SectionLabel>
         <h2 className="mt-6 max-w-2xl text-balance text-3xl font-medium tracking-tight sm:text-4xl lg:text-5xl">
-          Opciones para aprender <Mark>con nosotros.</Mark>
+          ¿Quieres llevarlo <Mark>más lejos?</Mark>
         </h2>
 
         <div className="mt-10 grid gap-6 lg:grid-cols-2">
-          <ProgramCard
-            tag="Sesión gratuita en vivo"
-            title="Sesión Cero BTM"
-            description="Las 4 leyes estructurales para validar zonas de alta probabilidad."
-            bullets={[
-              "Identifica el error que mantiene estancados a la mayoría de los traders.",
-              "Aprende a identificar el contexto antes de operar.",
-              "Entiende el mercado sin depender de indicadores ni señales.",
-            ]}
-            cta="Reservar mi cupo gratuito"
-            highlight={false}
-            availability={`Próxima sesión: ${getNextSaturdayLabel()}`}
-          />
           <ProgramCard
             tag="Acompañamiento 1:1"
             title="Mentoría Personalizada"
@@ -738,7 +771,7 @@ function Programs() {
               "Revisión continua de análisis y decisiones.",
               "Estructura, contexto y validación aplicados a tu operativa.",
             ]}
-            cta="Aplicar a la Mentoría"
+            cta="Aplicar a mentoría"
             highlight
             availability="Cupos limitados"
           />
@@ -938,10 +971,10 @@ function LeadForm() {
       <div className="mx-auto max-w-3xl px-6">
         <SectionLabel>Contacto</SectionLabel>
         <h2 className="mt-6 text-balance text-3xl font-medium tracking-tight sm:text-4xl lg:text-5xl">
-          Cuéntanos en qué <Mark>punto estás.</Mark>
+          Reserva tu lugar en <Mark>Sesión Cero BTM.</Mark>
         </h2>
         <p className="mt-4 text-sm text-muted-foreground sm:text-base">
-          Responderemos con la opción que mejor encaja con tu momento actual.
+          Completa el formulario y nos contactaremos para confirmarte tu lugar en la próxima sesión.
         </p>
 
         {submitted ? (
@@ -1036,7 +1069,7 @@ function LeadForm() {
                 </FieldGroup>
                 <FieldGroup label="¿Qué te interesa?">
                   <div className="grid gap-2 sm:grid-cols-3">
-                    {["Workshop", "Mentoría", "Ambos"].map((o) => (
+                    {["Sesión Cero", "Mentoría", "Ambos"].map((o) => (
                       <Radio
                         key={o}
                         name="interest"
@@ -1400,7 +1433,7 @@ function MobileStickyBar() {
         href="#formulario"
         className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
       >
-        Aplicar ahora <ArrowRight className="h-4 w-4" />
+        Sesión Cero <ArrowRight className="h-4 w-4" />
       </a>
     </div>
   );
@@ -1426,15 +1459,18 @@ function Closing() {
           No necesitas más conceptos.
           <br />
           <span className="text-muted-foreground">
-            Necesitas una forma <Mark>clara</Mark> de entender el mercado.
+            Necesitas aprender a <Mark>conectarlos.</Mark>
           </span>
         </h2>
+        <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+          Conoce el enfoque BTM en la Sesión Cero y descubre una forma diferente de interpretar el mercado.
+        </p>
         <div className="mt-8 sm:mt-12 flex justify-center">
           <a
             href="#formulario"
             className="inline-flex items-center justify-center gap-2 rounded-md bg-primary px-7 py-4 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
           >
-            Aplicar ahora <ArrowRight className="h-4 w-4" />
+            Reservar mi lugar <ArrowRight className="h-4 w-4" />
           </a>
         </div>
       </div>
