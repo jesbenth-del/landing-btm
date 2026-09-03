@@ -1,28 +1,39 @@
 import { createServerFn } from "@tanstack/react-start";
-import { z } from "zod";
 
 import { getSupabaseAdmin } from "./server/supabase-admin";
 
-const leadSchema = z.object({
-  name: z.string().min(1).max(200),
-  email: z.string().email(),
-  whatsapp: z.string().min(1).max(50),
-  studyTime: z.string().optional(),
-  struggle: z.string().max(2000).optional(),
-  interest: z.string().optional(),
-  source: z.enum(["form", "lead_magnet"]).optional(),
-  website: z.string().max(0).optional(),
-  privacyAccepted: z.literal(true).optional(),
-  privacyPolicyVersion: z.string().optional(),
-  privacyAcceptedAt: z.string().datetime().optional(),
-  sourcePage: z.string().url().optional(),
-  utm_source: z.string().max(200).optional(),
-  utm_medium: z.string().max(200).optional(),
-  utm_campaign: z.string().max(200).optional(),
-});
+type LeadInput = {
+  name: string;
+  email: string;
+  whatsapp: string;
+  studyTime?: string;
+  struggle?: string;
+  interest?: string;
+  source?: "form" | "lead_magnet";
+  website?: string;
+  privacyAccepted?: true;
+  privacyPolicyVersion?: string;
+  privacyAcceptedAt?: string;
+  sourcePage?: string;
+  utm_source?: string;
+  utm_medium?: string;
+  utm_campaign?: string;
+};
+
+function validateLead(data: LeadInput): LeadInput {
+  if (!data.name || data.name.length > 200) throw new Error("Datos inválidos");
+  if (!/^\\S+@\\S+\\.\\S+$/.test(data.email)) throw new Error("Datos inválidos");
+  if (!data.whatsapp || data.whatsapp.length > 50) throw new Error("Datos inválidos");
+  if (data.struggle && data.struggle.length > 2000) throw new Error("Datos inválidos");
+  if (data.website && data.website.length > 0) return data;
+  if (data.privacyAccepted !== undefined && data.privacyAccepted !== true) {
+    throw new Error("Datos inválidos");
+  }
+  return data;
+}
 
 export const submitLead = createServerFn({ method: "POST" })
-  .validator(leadSchema)
+  .validator((data: LeadInput) => validateLead(data))
   .handler(async ({ data }) => {
     if (data.website) return { ok: true };
 
