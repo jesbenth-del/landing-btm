@@ -26,16 +26,6 @@ export default defineConfig(({ mode }) => {
         "@tanstack/query-core",
       ],
     },
-    optimizeDeps: {
-      include: [
-        "react",
-        "react-dom",
-        "react-dom/client",
-        "react/jsx-runtime",
-        "react/jsx-dev-runtime",
-      ],
-      ignoreOutdatedRequests: true,
-    },
     plugins: [
       tailwindcss(),
       tanstackStart({
