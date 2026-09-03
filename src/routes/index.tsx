@@ -98,6 +98,7 @@ function Index() {
       <main>
         <Hero />
         <Problem />
+        <SessionZero />
         <Philosophy />
         <Difference />
         <Method />
@@ -706,6 +707,28 @@ function getNextSaturdayLabel(): string {
   return formatted.charAt(0).toUpperCase() + formatted.slice(1);
 }
 
+function SessionZero() {
+  return (
+    <section className="border-b border-border/30 sm:border-border/60 py-10 sm:py-20">
+      <div className="mx-auto max-w-6xl px-6">
+        <ProgramCard
+          tag="Sesión gratuita en vivo"
+          title="Sesión Cero BTM"
+          description="Las 4 leyes estructurales para validar zonas de alta probabilidad."
+          bullets={[
+            "Identifica el error que mantiene estancados a la mayoría de los traders.",
+            "Aprende a identificar el contexto antes de operar.",
+            "Entiende el mercado sin depender de indicadores ni señales.",
+          ]}
+          cta="Reservar mi cupo gratuito"
+          highlight={false}
+          availability={`Próxima sesión: ${getNextSaturdayLabel()}`}
+        />
+      </div>
+    </section>
+  );
+}
+
 function Programs() {
   return (
     <section id="programas" className="border-b border-border/30 sm:border-border/60 py-10 sm:py-20">
@@ -716,19 +739,6 @@ function Programs() {
         </h2>
 
         <div className="mt-10 grid gap-6 lg:grid-cols-2">
-          <ProgramCard
-            tag="Sesión gratuita en vivo"
-            title="Sesión Cero BTM"
-            description="Las 4 leyes estructurales para validar zonas de alta probabilidad."
-            bullets={[
-              "Identifica el error que mantiene estancados a la mayoría de los traders.",
-              "Aprende a identificar el contexto antes de operar.",
-              "Entiende el mercado sin depender de indicadores ni señales.",
-            ]}
-            cta="Reservar mi cupo gratuito"
-            highlight={false}
-            availability={`Próxima sesión: ${getNextSaturdayLabel()}`}
-          />
           <ProgramCard
             tag="Acompañamiento 1:1"
             title="Mentoría Personalizada"
