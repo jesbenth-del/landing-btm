@@ -97,8 +97,9 @@ function Index() {
       <Nav />
       <main>
         <Hero />
-        <Problem />
-        <Philosophy />
+      <Problem />
+      <SessionZero />
+      <Philosophy />
         <Difference />
         <Method />
         <Testimonials />
@@ -170,7 +171,7 @@ function Nav() {
           href="#formulario"
           className="hidden items-center gap-2 rounded-md bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground transition-opacity hover:opacity-90 md:inline-flex"
         >
-          Aplicar <ArrowRight className="h-3.5 w-3.5" />
+          Aplicar  <ArrowRight className="h-3.5 w-3.5" />
         </a>
 
         {/* Mobile: hamburger toggle */}
@@ -231,7 +232,10 @@ function Hero() {
       />
       <div className="relative mx-auto grid max-w-6xl gap-8 px-6 pt-16 pb-20 lg:grid-cols-[1.1fr_1fr] lg:items-center lg:pt-20 lg:pb-24">
         <div>
-          <SectionLabel>Forex · Oro · Índices</SectionLabel>
+          <div className="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground">
+            <span className="h-px w-6 bg-primary" />
+            Forex · Oro · Índices
+          </div>
           <h1 className="mt-6 text-balance text-4xl font-medium leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
             Entiende lo que <Mark>realmente</Mark> mueve el mercado.
           </h1>
@@ -273,13 +277,13 @@ function Hero() {
               <div className="pointer-events-none absolute inset-0 bg-black/10" />
             </div>
           </div>
-          <div className="absolute -bottom-4 left-4 right-4 flex flex-col gap-2.5 rounded-xl border border-border/60 bg-card/95 px-5 py-4 text-xs backdrop-blur sm:left-6 sm:right-6 sm:flex-row sm:items-center sm:justify-between sm:gap-0 sm:px-4 sm:py-3">
+          <div className="absolute -bottom-4 left-4 right-4 flex flex-col gap-0 rounded-xl border border-border/60 bg-card/95 px-5 py-4 text-xs backdrop-blur sm:left-6 sm:right-6 sm:flex-row sm:items-center sm:justify-between sm:gap-0 sm:px-4 sm:py-3">
             <span className="inline-flex items-center gap-1.5 text-primary font-medium">
               <span className="h-1.5 w-1.5 rounded-full bg-primary" />
               Jesus Bentham
             </span>
             <span className="text-muted-foreground">Fundador</span>
-            <span className="text-muted-foreground">BTM Academy</span>
+            <span className="text-sm text-muted-foreground">BTM Academy</span>
           </div>
         </div>
       </div>
@@ -290,7 +294,7 @@ function Hero() {
 function Stat({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <div className="text-[10px] uppercase tracking-widest text-muted-foreground">{label}</div>
+      <div className="text-xs uppercase tracking-widest text-muted-foreground">{label}</div>
       <div className="mt-1 text-sm font-medium text-foreground">{value}</div>
     </div>
   );
@@ -310,7 +314,10 @@ function Problem() {
   return (
     <section id="problema" className="border-b border-border/30 sm:border-border/60 bg-card/20 py-10 sm:py-20">
       <div className="mx-auto max-w-6xl px-6">
-        <SectionLabel>El punto de partida</SectionLabel>
+        <div className="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground">
+          <span className="h-px w-6 bg-primary" />
+          El punto de partida
+        </div>
         <h2 className="mt-6 max-w-2xl text-balance text-3xl font-medium tracking-tight sm:text-4xl lg:text-5xl">
           Quizás esto te resulta <Mark>familiar.</Mark>
         </h2>
@@ -332,6 +339,30 @@ function Problem() {
   );
 }
 
+/* ---------- Session Zero ---------- */
+
+function SessionZero() {
+  return (
+    <section className="border-b border-border/30 py-10 sm:border-border/60 sm:py-20">
+      <div className="mx-auto max-w-6xl px-6">
+        <ProgramCard
+          tag="Sesión gratuita en vivo"
+          title="Sesión Cero BTM"
+          description="Las 4 leyes estructurales para validar zonas de alta probabilidad."
+          bullets={[
+            "Identifica el error que mantiene estancados a la mayoría de los traders.",
+            "Aprende a identificar el contexto antes de operar.",
+            "Entiende el mercado sin depender de indicadores ni señales.",
+          ]}
+          cta="Reservar mi cupo gratuito"
+          highlight={false}
+          availability={`Próxima sesión: ${getNextSaturdayLabel()}`}
+        />
+      </div>
+    </section>
+  );
+}
+
 /* ---------- Philosophy ---------- */
 
 function Philosophy() {
@@ -340,7 +371,10 @@ function Philosophy() {
       <div className="mx-auto max-w-6xl px-6">
         <div className="grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-center">
           <div>
-            <SectionLabel>Filosofía</SectionLabel>
+            <div className="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground">
+              <span className="h-px w-6 bg-primary" />
+              Filosofía
+            </div>
             <h2 className="mt-6 text-balance text-3xl font-medium tracking-tight sm:text-4xl lg:text-5xl">
               No necesitas más <Mark>información.</Mark>
             </h2>
@@ -407,24 +441,13 @@ function FlowDiagram() {
 /* ---------- Difference (Why BTM is different) ---------- */
 
 function Difference() {
-  const negative = [
-    "Aprendes conceptos por separado.",
-    "Saltas de una estrategia a otra.",
-    "Memorizas nombres sin entender el contexto.",
-    "Dependes de indicadores o señales.",
-    "Terminas con más información pero menos claridad.",
-  ];
-  const positive = [
-    "Aprendes a conectar todas las piezas.",
-    "Entiendes el contexto antes de buscar entradas.",
-    "Desarrollas criterio propio.",
-    "Tomas decisiones con lógica estructurada.",
-    "Construyes una metodología que puedes repetir.",
-  ];
   return (
     <section className="border-b border-border/30 sm:border-border/60 py-10 sm:py-20">
       <div className="mx-auto max-w-6xl px-6">
-        <SectionLabel>Diferencia</SectionLabel>
+        <div className="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground">
+          <span className="h-px w-6 bg-primary" />
+          Diferencia
+        </div>
         <h2 className="mt-6 max-w-3xl text-balance text-3xl font-medium tracking-tight sm:text-4xl lg:text-5xl">
           ¿Por qué BTM Academy es <Mark>diferente?</Mark>
         </h2>
@@ -526,7 +549,10 @@ function Method() {
       <div className="mx-auto max-w-6xl px-6">
         <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
           <div>
-            <SectionLabel>Metodología</SectionLabel>
+            <div className="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground">
+              <span className="h-px w-6 bg-primary" />
+              Metodología
+            </div>
             <h2 className="mt-6 max-w-2xl text-balance text-3xl font-medium tracking-tight sm:text-4xl lg:text-5xl">
               Cómo <Mark>enseñamos.</Mark>
             </h2>
@@ -617,7 +643,10 @@ function Testimonials() {
   return (
     <section className="border-b border-border/30 sm:border-border/60 py-10 sm:py-20">
       <div className="mx-auto max-w-6xl px-6">
-        <SectionLabel>Estudiantes</SectionLabel>
+        <div className="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground">
+          <span className="h-px w-6 bg-primary" />
+          Estudiantes
+        </div>
         <h2 className="mt-6 max-w-2xl text-balance text-3xl font-medium tracking-tight sm:text-4xl lg:text-5xl">
           Lo que dicen nuestros <Mark>estudiantes.</Mark>
         </h2>
@@ -710,25 +739,15 @@ function Programs() {
   return (
     <section id="programas" className="border-b border-border/30 sm:border-border/60 py-10 sm:py-20">
       <div className="mx-auto max-w-6xl px-6">
-        <SectionLabel>Programas</SectionLabel>
+        <div className="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground">
+          <span className="h-px w-6 bg-primary" />
+          Programas
+        </div>
         <h2 className="mt-6 max-w-2xl text-balance text-3xl font-medium tracking-tight sm:text-4xl lg:text-5xl">
           Opciones para aprender <Mark>con nosotros.</Mark>
         </h2>
 
         <div className="mt-10 grid gap-6 lg:grid-cols-2">
-          <ProgramCard
-            tag="Sesión gratuita en vivo"
-            title="Sesión Cero BTM"
-            description="Las 4 leyes estructurales para validar zonas de alta probabilidad."
-            bullets={[
-              "Identifica el error que mantiene estancados a la mayoría de los traders.",
-              "Aprende a identificar el contexto antes de operar.",
-              "Entiende el mercado sin depender de indicadores ni señales.",
-            ]}
-            cta="Reservar mi cupo gratuito"
-            highlight={false}
-            availability={`Próxima sesión: ${getNextSaturdayLabel()}`}
-          />
           <ProgramCard
             tag="Acompañamiento 1:1"
             title="Mentoría Personalizada"
@@ -816,7 +835,10 @@ function FAQ() {
   return (
     <section id="faq" className="border-b border-border/30 sm:border-border/60 py-10 sm:py-20">
       <div className="mx-auto max-w-3xl px-6">
-        <SectionLabel>Preguntas frecuentes</SectionLabel>
+        <div className="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground">
+          <span className="h-px w-6 bg-primary" />
+          Preguntas frecuentes
+        </div>
         <h2 className="mt-6 text-balance text-3xl font-medium tracking-tight sm:text-4xl lg:text-5xl">
           Resolvemos tus <Mark>dudas.</Mark>
         </h2>
@@ -936,7 +958,10 @@ function LeadForm() {
   return (
     <section id="formulario" className="border-b border-border/30 sm:border-border/60 bg-card/20 py-10 sm:py-20">
       <div className="mx-auto max-w-3xl px-6">
-        <SectionLabel>Contacto</SectionLabel>
+        <div className="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground">
+          <span className="h-px w-6 bg-primary" />
+          Contacto
+        </div>
         <h2 className="mt-6 text-balance text-3xl font-medium tracking-tight sm:text-4xl lg:text-5xl">
           Cuéntanos en qué <Mark>punto estás.</Mark>
         </h2>
