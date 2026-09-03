@@ -2,7 +2,6 @@ import { defineConfig, loadEnv } from "vite";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import viteReact from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
-import tsConfigPaths from "vite-tsconfig-paths";
 import { nitro } from "nitro/vite";
 import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
 
@@ -17,6 +16,7 @@ export default defineConfig(({ mode }) => {
     css: { transformer: "lightningcss" },
     resolve: {
       alias: { "@": `${process.cwd()}/src` },
+      tsconfigPaths: true,
       dedupe: [
         "react",
         "react-dom",
@@ -38,7 +38,6 @@ export default defineConfig(({ mode }) => {
     },
     plugins: [
       tailwindcss(),
-      tsConfigPaths({ projects: ["./tsconfig.json"] }),
       tanstackStart({
         server: { entry: "server" },
         importProtection: {
