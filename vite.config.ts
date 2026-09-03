@@ -14,6 +14,9 @@ export default defineConfig(({ mode }) => {
   return {
     define: envDefine,
     css: { transformer: "lightningcss" },
+    optimizeDeps: {
+      exclude: ["zod"],
+    },
     resolve: {
       alias: { "@": `${process.cwd()}/src` },
       tsconfigPaths: true,
