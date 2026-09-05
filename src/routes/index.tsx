@@ -707,16 +707,17 @@ function TrustStats() {
 
 function getNextSaturdayLabel(): string {
   const today = new Date();
-  const day = today.getDay();
+  const day = today.getUTCDay();
   const daysUntilSaturday = day === 6 ? 7 : (6 - day + 7) % 7;
   const nextSaturday = new Date(today);
-  nextSaturday.setDate(today.getDate() + daysUntilSaturday);
+  nextSaturday.setUTCDate(today.getUTCDate() + daysUntilSaturday);
 
   const formatted = new Intl.DateTimeFormat("es-ES", {
     weekday: "long",
     day: "numeric",
     month: "long",
     year: "numeric",
+    timeZone: "UTC",
   }).format(nextSaturday);
 
   return formatted.charAt(0).toUpperCase() + formatted.slice(1);
