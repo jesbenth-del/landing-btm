@@ -98,6 +98,7 @@ function Index() {
       <main>
         <Hero />
         <Problem />
+        <ContextMessage />
         <SessionZero />
         <Philosophy />
         <Difference />
@@ -328,6 +329,21 @@ function Problem() {
             </div>
           ))}
         </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------- Context message ---------- */
+
+function ContextMessage() {
+  return (
+    <section className="border-b border-border/30 sm:border-border/60 py-10 sm:py-16">
+      <div className="mx-auto max-w-4xl px-6 text-center">
+        <p className="text-balance text-2xl font-medium leading-snug tracking-tight sm:text-3xl lg:text-4xl">
+          El problema probablemente no es que necesites aprender <Mark>más.</Mark>
+          <br className="hidden sm:block" /> Es que nadie te enseñó a conectar lo que ya <Mark>sabes.</Mark>
+        </p>
       </div>
     </section>
   );
