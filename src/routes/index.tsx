@@ -341,7 +341,7 @@ function ContextMessage() {
       <div className="mx-auto max-w-4xl px-6 text-center">
         <p className="text-balance text-2xl font-medium leading-snug tracking-tight text-white sm:text-3xl lg:text-4xl">
           El problema probablemente no es que necesites <Mark>aprender más.</Mark>
-          <br className="hidden sm:block" /> Es que nadie te enseñó a conectar <Mark>lo que ya sabes.</Mark>
+          <br className="hidden sm:block" /> Es que nadie te enseñó a <Mark>conectar lo que ya sabes.</Mark>
         </p>
       </div>
     </section>
