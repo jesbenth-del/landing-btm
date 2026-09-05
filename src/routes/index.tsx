@@ -274,7 +274,7 @@ function Hero() {
               <div className="pointer-events-none absolute inset-0 bg-black/10" />
             </div>
           </div>
-          <div className="absolute -bottom-4 left-4 right-4 flex flex-col gap-2.5 rounded-xl border border-border/60 bg-card/95 px-5 py-4 text-xs backdrop-blur sm:left-6 sm:right-6 sm:flex-row sm:items-center sm:justify-between sm:gap-0 sm:px-4 sm:py-3">
+          <div className="absolute -bottom-4 left-4 right-4 flex flex-col gap-0.5 rounded-xl border border-border/60 bg-card/95 px-5 py-4 text-xs backdrop-blur sm:left-6 sm:right-6 sm:flex-row sm:items-center sm:justify-between sm:gap-0 sm:px-4 sm:py-3">
             <span className="inline-flex items-center gap-1.5 text-primary font-medium text-sm">
               <span className="h-1.5 w-1.5 rounded-full bg-primary" />
               Jesus Bentham
