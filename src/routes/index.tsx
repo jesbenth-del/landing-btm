@@ -238,8 +238,7 @@ function Hero() {
             Entiende lo que <Mark>realmente</Mark> mueve el mercado.
           </h1>
           <p className="mt-6 max-w-xl text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg">
-            Deja de acumular conceptos aislados. Aprende a conectar estructura, contexto y
-            validación para tomar decisiones con criterio en Forex, Oro e Índices.
+            Deja de acumular conceptos aislados. Aprende a conectar contexto, estructura y validación para entender el mercado con mayor claridad en Forex, Oro e Índices.
           </p>
           <div className="mt-10">
             <a
@@ -247,7 +246,7 @@ function Hero() {
               data-hero-cta=""
               className="group inline-flex items-center justify-center gap-2 rounded-md bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
             >
-              Reserva tu cupo
+              Reserva tu lugar en Sesión Cero
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </a>
           </div>
@@ -276,7 +275,7 @@ function Hero() {
             </div>
           </div>
           <div className="absolute -bottom-4 left-4 right-4 flex flex-col gap-2.5 rounded-xl border border-border/60 bg-card/95 px-5 py-4 text-xs backdrop-blur sm:left-6 sm:right-6 sm:flex-row sm:items-center sm:justify-between sm:gap-0 sm:px-4 sm:py-3">
-            <span className="inline-flex items-center gap-1.5 text-primary font-medium">
+            <span className="inline-flex items-center gap-1.5 text-primary font-medium text-sm">
               <span className="h-1.5 w-1.5 rounded-full bg-primary" />
               Jesus Bentham
             </span>
@@ -292,7 +291,7 @@ function Hero() {
 function Stat({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <div className="text-[10px] uppercase tracking-widest text-muted-foreground">{label}</div>
+      <div className="text-xs uppercase tracking-widest text-primary">{label}</div>
       <div className="mt-1 text-sm font-medium text-foreground">{value}</div>
     </div>
   );
@@ -302,12 +301,12 @@ function Stat({ label, value }: { label: string; value: string }) {
 
 function Problem() {
   const items = [
-    "Has visto cientos de videos de trading.",
-    "Conoces muchos conceptos pero sigues confundido.",
-    "Cada mentor enseña algo diferente.",
-    "Tu análisis cambia constantemente.",
-    "Sientes que sabes cosas pero no tienes claridad.",
-    "Te cuesta conectar todas las piezas.",
+    "Tienes muchos conceptos, pero no sabes cómo conectarlos.",
+    "Cada vez que algo no funciona, terminas buscando otra metodología.",
+    "Sabes identificar zonas, patrones y estructuras, pero no sabes cuándo realmente tienen sentido.",
+    "Bajas demasiado rápido a temporalidades pequeñas buscando una entrada.",
+    "El exceso de información te ha dado más dudas que claridad.",
+    "Terminas operando movimientos que ni siquiera necesitabas operar.",
   ];
   return (
     <section id="problema" className="border-b border-border/30 sm:border-border/60 bg-card/20 py-10 sm:py-20">
@@ -340,9 +339,9 @@ function ContextMessage() {
   return (
     <section className="border-b border-border/30 sm:border-border/60 py-10 sm:py-16">
       <div className="mx-auto max-w-4xl px-6 text-center">
-        <p className="text-balance text-2xl font-medium leading-snug tracking-tight sm:text-3xl lg:text-4xl">
-          El problema probablemente no es que necesites aprender <Mark>más.</Mark>
-          <br className="hidden sm:block" /> Es que nadie te enseñó a conectar lo que ya <Mark>sabes.</Mark>
+        <p className="text-balance text-2xl font-medium leading-snug tracking-tight text-white sm:text-3xl lg:text-4xl">
+          El problema probablemente no es que necesites <Mark>aprender más.</Mark>
+          <br className="hidden sm:block" /> Es que nadie te enseñó a conectar <Mark>lo que ya sabes.</Mark>
         </p>
       </div>
     </section>
