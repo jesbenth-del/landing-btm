@@ -9,30 +9,20 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as RegistroRouteImport } from './routes/registro'
-import { Route as ProcesandoRouteImport } from './routes/procesando'
-import { Route as PoliticaDePrivacidadRouteImport } from './routes/politica-de-privacidad'
-import { Route as PoliticaDeCookiesRouteImport } from './routes/politica-de-cookies'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as HerramientasIndexRouteImport } from './routes/herramientas/index'
+import { Route as PoliticaDeCookiesRouteImport } from './routes/politica-de-cookies'
+import { Route as PoliticaDePrivacidadRouteImport } from './routes/politica-de-privacidad'
+import { Route as ProcesandoRouteImport } from './routes/procesando'
+import { Route as RegistroRouteImport } from './routes/registro'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
-import { Route as AdminLoginRouteImport } from './routes/admin/login'
 import { Route as AdminHerramientasRouteImport } from './routes/admin/herramientas'
+import { Route as AdminLoginRouteImport } from './routes/admin/login'
+import { Route as HerramientasIndexRouteImport } from './routes/herramientas/index'
 import { Route as HerramientasArchivoIdRouteImport } from './routes/herramientas/archivo.$id'
 
-const RegistroRoute = RegistroRouteImport.update({
-  id: '/registro',
-  path: '/registro',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ProcesandoRoute = ProcesandoRouteImport.update({
-  id: '/procesando',
-  path: '/procesando',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PoliticaDePrivacidadRoute = PoliticaDePrivacidadRouteImport.update({
-  id: '/politica-de-privacidad',
-  path: '/politica-de-privacidad',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PoliticaDeCookiesRoute = PoliticaDeCookiesRouteImport.update({
@@ -40,14 +30,19 @@ const PoliticaDeCookiesRoute = PoliticaDeCookiesRouteImport.update({
   path: '/politica-de-cookies',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const PoliticaDePrivacidadRoute = PoliticaDePrivacidadRouteImport.update({
+  id: '/politica-de-privacidad',
+  path: '/politica-de-privacidad',
   getParentRoute: () => rootRouteImport,
 } as any)
-const HerramientasIndexRoute = HerramientasIndexRouteImport.update({
-  id: '/herramientas/',
-  path: '/herramientas/',
+const ProcesandoRoute = ProcesandoRouteImport.update({
+  id: '/procesando',
+  path: '/procesando',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RegistroRoute = RegistroRouteImport.update({
+  id: '/registro',
+  path: '/registro',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminIndexRoute = AdminIndexRouteImport.update({
@@ -55,14 +50,19 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/admin/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminHerramientasRoute = AdminHerramientasRouteImport.update({
+  id: '/admin/herramientas',
+  path: '/admin/herramientas',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminLoginRoute = AdminLoginRouteImport.update({
   id: '/admin/login',
   path: '/admin/login',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AdminHerramientasRoute = AdminHerramientasRouteImport.update({
-  id: '/admin/herramientas',
-  path: '/admin/herramientas',
+const HerramientasIndexRoute = HerramientasIndexRouteImport.update({
+  id: '/herramientas/',
+  path: '/herramientas/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HerramientasArchivoIdRoute = HerramientasArchivoIdRouteImport.update({
@@ -162,25 +162,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/registro': {
-      id: '/registro'
-      path: '/registro'
-      fullPath: '/registro'
-      preLoaderRoute: typeof RegistroRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/procesando': {
-      id: '/procesando'
-      path: '/procesando'
-      fullPath: '/procesando'
-      preLoaderRoute: typeof ProcesandoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/politica-de-privacidad': {
-      id: '/politica-de-privacidad'
-      path: '/politica-de-privacidad'
-      fullPath: '/politica-de-privacidad'
-      preLoaderRoute: typeof PoliticaDePrivacidadRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/politica-de-cookies': {
@@ -190,18 +176,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PoliticaDeCookiesRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/politica-de-privacidad': {
+      id: '/politica-de-privacidad'
+      path: '/politica-de-privacidad'
+      fullPath: '/politica-de-privacidad'
+      preLoaderRoute: typeof PoliticaDePrivacidadRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/herramientas/': {
-      id: '/herramientas/'
-      path: '/herramientas'
-      fullPath: '/herramientas/'
-      preLoaderRoute: typeof HerramientasIndexRouteImport
+    '/procesando': {
+      id: '/procesando'
+      path: '/procesando'
+      fullPath: '/procesando'
+      preLoaderRoute: typeof ProcesandoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/registro': {
+      id: '/registro'
+      path: '/registro'
+      fullPath: '/registro'
+      preLoaderRoute: typeof RegistroRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/': {
@@ -211,6 +204,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/herramientas': {
+      id: '/admin/herramientas'
+      path: '/admin/herramientas'
+      fullPath: '/admin/herramientas'
+      preLoaderRoute: typeof AdminHerramientasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/login': {
       id: '/admin/login'
       path: '/admin/login'
@@ -218,11 +218,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/admin/herramientas': {
-      id: '/admin/herramientas'
-      path: '/admin/herramientas'
-      fullPath: '/admin/herramientas'
-      preLoaderRoute: typeof AdminHerramientasRouteImport
+    '/herramientas/': {
+      id: '/herramientas/'
+      path: '/herramientas'
+      fullPath: '/herramientas/'
+      preLoaderRoute: typeof HerramientasIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/herramientas/archivo/$id': {
