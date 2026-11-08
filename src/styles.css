@@ -60,6 +60,67 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Animaciones del embudo */
+  --animate-fade-up: fade-up 0.6s ease-out both;
+  --animate-ticker: ticker 38s linear infinite;
+  --animate-progress-shine: progress-shine 2.4s ease-in-out infinite;
+  --animate-scanline: scanline 7s linear infinite;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* El contenido del ticker va duplicado: recorrer la mitad cierra el bucle sin costura. */
+@keyframes ticker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes progress-shine {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(400%);
+  }
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  10%,
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(var(--scan-distance, 640px));
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 :root {
@@ -279,4 +340,268 @@
 
 #cc-main .pm__close-btn svg {
   stroke: var(--foreground);
+}
+
+/* ==========================================================================
+   Efectos de la landing (2026)
+   ========================================================================== */
+
+/* Ángulo animable para los bordes de luz (conic-gradient que gira). */
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes spin-angle {
+  to {
+    --angle: 360deg;
+  }
+}
+
+/* Borde con un haz de luz que recorre el contorno. */
+.border-beam {
+  position: relative;
+  isolation: isolate;
+}
+.border-beam::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  padding: 1px;
+  border-radius: inherit;
+  background: conic-gradient(
+    from var(--angle),
+    transparent 0 65%,
+    oklch(0.9 0.18 110 / 0.9) 82%,
+    oklch(1 0 0 / 0.9) 88%,
+    transparent 100%
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: spin-angle 6s linear infinite;
+  pointer-events: none;
+}
+
+/* Vidrio esmerilado. */
+.glass {
+  background: linear-gradient(180deg, oklch(1 0 0 / 0.06), oklch(1 0 0 / 0.02));
+  border: 1px solid oklch(1 0 0 / 0.09);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  box-shadow:
+    inset 0 1px 0 0 oklch(1 0 0 / 0.08),
+    0 30px 80px -30px oklch(0 0 0 / 0.8);
+}
+
+/* Tarjeta que se ilumina donde está el cursor (--mx/--my los pone JS). */
+.spotlight {
+  position: relative;
+  isolation: isolate;
+}
+.spotlight::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(
+    420px circle at var(--mx, 50%) var(--my, -20%),
+    oklch(0.9 0.18 110 / 0.13),
+    transparent 45%
+  );
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.spotlight:hover::after {
+  opacity: 1;
+}
+.spotlight-border {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: radial-gradient(
+    300px circle at var(--mx, 50%) var(--my, -20%),
+    oklch(0.9 0.18 110 / 0.7),
+    transparent 60%
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.spotlight:hover .spotlight-border {
+  opacity: 1;
+}
+
+/* Texto con barrido de luz. */
+.text-shimmer {
+  background: linear-gradient(
+    110deg,
+    var(--color-primary) 25%,
+    oklch(1 0 0) 45%,
+    var(--color-primary) 65%
+  );
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 5s linear infinite;
+}
+@keyframes shimmer {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: -150% 0;
+  }
+}
+
+/* Texto con degradado blanco → gris, para titulares grandes. */
+.text-fade {
+  background: linear-gradient(180deg, oklch(1 0 0) 30%, oklch(1 0 0 / 0.45));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Titular que entra palabra por palabra, con desenfoque. */
+@keyframes word-up {
+  from {
+    opacity: 0;
+    transform: translateY(0.55em);
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
+}
+.word-reveal > span {
+  display: inline-block;
+  animation: word-up 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: calc(var(--i, 0) * 70ms + var(--base, 0ms));
+}
+
+/* Manchas de luz en movimiento lento. */
+@keyframes aurora {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  33% {
+    transform: translate3d(10%, -8%, 0) scale(1.15);
+  }
+  66% {
+    transform: translate3d(-8%, 6%, 0) scale(0.92);
+  }
+}
+.animate-aurora {
+  animation: aurora 20s ease-in-out infinite;
+}
+
+/* Gráfico del héroe: la línea se dibuja y las velas crecen. */
+@keyframes draw-line {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes candle-grow {
+  from {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  to {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+@keyframes zone-in {
+  from {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+@keyframes ping-soft {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(3.2);
+    opacity: 0;
+  }
+}
+
+/* Rejilla con punto de fuga. */
+.grid-lines {
+  background-image:
+    linear-gradient(to right, oklch(1 0 0 / 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(1 0 0 / 0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+/* Grano fino sobre toda la página: quita el aspecto "plano digital". */
+.noise::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  pointer-events: none;
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Animaciones ligadas al scroll, donde el navegador las soporta. */
+@supports (animation-timeline: view()) {
+  .scroll-rise {
+    animation: fade-up linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 28%;
+  }
+  .scroll-scale {
+    animation: scroll-scale linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
+  }
+  .scroll-fill {
+    transform-origin: top;
+    animation: scroll-fill linear both;
+    animation-timeline: view();
+    animation-range: cover 10% cover 70%;
+  }
+}
+@keyframes scroll-scale {
+  from {
+    opacity: 0.3;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes scroll-fill {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
 }

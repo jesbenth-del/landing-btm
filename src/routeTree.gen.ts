@@ -9,10 +9,27 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as RegistroRouteImport } from './routes/registro'
+import { Route as ProcesandoRouteImport } from './routes/procesando'
 import { Route as PoliticaDePrivacidadRouteImport } from './routes/politica-de-privacidad'
 import { Route as PoliticaDeCookiesRouteImport } from './routes/politica-de-cookies'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as HerramientasIndexRouteImport } from './routes/herramientas/index'
+import { Route as AdminIndexRouteImport } from './routes/admin/index'
+import { Route as AdminLoginRouteImport } from './routes/admin/login'
+import { Route as AdminHerramientasRouteImport } from './routes/admin/herramientas'
+import { Route as HerramientasArchivoIdRouteImport } from './routes/herramientas/archivo.$id'
 
+const RegistroRoute = RegistroRouteImport.update({
+  id: '/registro',
+  path: '/registro',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProcesandoRoute = ProcesandoRouteImport.update({
+  id: '/procesando',
+  path: '/procesando',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PoliticaDePrivacidadRoute = PoliticaDePrivacidadRouteImport.update({
   id: '/politica-de-privacidad',
   path: '/politica-de-privacidad',
@@ -28,39 +45,137 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HerramientasIndexRoute = HerramientasIndexRouteImport.update({
+  id: '/herramientas/',
+  path: '/herramientas/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/admin/',
+  path: '/admin/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/admin/login',
+  path: '/admin/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminHerramientasRoute = AdminHerramientasRouteImport.update({
+  id: '/admin/herramientas',
+  path: '/admin/herramientas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HerramientasArchivoIdRoute = HerramientasArchivoIdRouteImport.update({
+  id: '/herramientas/archivo/$id',
+  path: '/herramientas/archivo/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/politica-de-cookies': typeof PoliticaDeCookiesRoute
   '/politica-de-privacidad': typeof PoliticaDePrivacidadRoute
+  '/procesando': typeof ProcesandoRoute
+  '/registro': typeof RegistroRoute
+  '/admin/herramientas': typeof AdminHerramientasRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/': typeof AdminIndexRoute
+  '/herramientas/': typeof HerramientasIndexRoute
+  '/herramientas/archivo/$id': typeof HerramientasArchivoIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/politica-de-cookies': typeof PoliticaDeCookiesRoute
   '/politica-de-privacidad': typeof PoliticaDePrivacidadRoute
+  '/procesando': typeof ProcesandoRoute
+  '/registro': typeof RegistroRoute
+  '/admin/herramientas': typeof AdminHerramientasRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin': typeof AdminIndexRoute
+  '/herramientas': typeof HerramientasIndexRoute
+  '/herramientas/archivo/$id': typeof HerramientasArchivoIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/politica-de-cookies': typeof PoliticaDeCookiesRoute
   '/politica-de-privacidad': typeof PoliticaDePrivacidadRoute
+  '/procesando': typeof ProcesandoRoute
+  '/registro': typeof RegistroRoute
+  '/admin/herramientas': typeof AdminHerramientasRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/': typeof AdminIndexRoute
+  '/herramientas/': typeof HerramientasIndexRoute
+  '/herramientas/archivo/$id': typeof HerramientasArchivoIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/politica-de-cookies' | '/politica-de-privacidad'
+  fullPaths:
+    | '/'
+    | '/politica-de-cookies'
+    | '/politica-de-privacidad'
+    | '/procesando'
+    | '/registro'
+    | '/admin/herramientas'
+    | '/admin/login'
+    | '/admin/'
+    | '/herramientas/'
+    | '/herramientas/archivo/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/politica-de-cookies' | '/politica-de-privacidad'
-  id: '__root__' | '/' | '/politica-de-cookies' | '/politica-de-privacidad'
+  to:
+    | '/'
+    | '/politica-de-cookies'
+    | '/politica-de-privacidad'
+    | '/procesando'
+    | '/registro'
+    | '/admin/herramientas'
+    | '/admin/login'
+    | '/admin'
+    | '/herramientas'
+    | '/herramientas/archivo/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/politica-de-cookies'
+    | '/politica-de-privacidad'
+    | '/procesando'
+    | '/registro'
+    | '/admin/herramientas'
+    | '/admin/login'
+    | '/admin/'
+    | '/herramientas/'
+    | '/herramientas/archivo/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   PoliticaDeCookiesRoute: typeof PoliticaDeCookiesRoute
   PoliticaDePrivacidadRoute: typeof PoliticaDePrivacidadRoute
+  ProcesandoRoute: typeof ProcesandoRoute
+  RegistroRoute: typeof RegistroRoute
+  AdminHerramientasRoute: typeof AdminHerramientasRoute
+  AdminLoginRoute: typeof AdminLoginRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+  HerramientasIndexRoute: typeof HerramientasIndexRoute
+  HerramientasArchivoIdRoute: typeof HerramientasArchivoIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/registro': {
+      id: '/registro'
+      path: '/registro'
+      fullPath: '/registro'
+      preLoaderRoute: typeof RegistroRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/procesando': {
+      id: '/procesando'
+      path: '/procesando'
+      fullPath: '/procesando'
+      preLoaderRoute: typeof ProcesandoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/politica-de-privacidad': {
       id: '/politica-de-privacidad'
       path: '/politica-de-privacidad'
@@ -82,6 +197,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/herramientas/': {
+      id: '/herramientas/'
+      path: '/herramientas'
+      fullPath: '/herramientas/'
+      preLoaderRoute: typeof HerramientasIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/admin'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/login': {
+      id: '/admin/login'
+      path: '/admin/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/herramientas': {
+      id: '/admin/herramientas'
+      path: '/admin/herramientas'
+      fullPath: '/admin/herramientas'
+      preLoaderRoute: typeof AdminHerramientasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/herramientas/archivo/$id': {
+      id: '/herramientas/archivo/$id'
+      path: '/herramientas/archivo/$id'
+      fullPath: '/herramientas/archivo/$id'
+      preLoaderRoute: typeof HerramientasArchivoIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -89,6 +239,13 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   PoliticaDeCookiesRoute: PoliticaDeCookiesRoute,
   PoliticaDePrivacidadRoute: PoliticaDePrivacidadRoute,
+  ProcesandoRoute: ProcesandoRoute,
+  RegistroRoute: RegistroRoute,
+  AdminHerramientasRoute: AdminHerramientasRoute,
+  AdminLoginRoute: AdminLoginRoute,
+  AdminIndexRoute: AdminIndexRoute,
+  HerramientasIndexRoute: HerramientasIndexRoute,
+  HerramientasArchivoIdRoute: HerramientasArchivoIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

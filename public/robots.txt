@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /procesando
+Disallow: /registro
+Disallow: /herramientas
 
 Sitemap: https://btmacademy.com/sitemap.xml
