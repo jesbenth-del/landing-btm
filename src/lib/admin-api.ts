@@ -49,6 +49,8 @@ export interface AdminLead {
   id: string;
   first_name: string;
   last_name: string;
+  /** ¿Cuánto tiempo lleva analizando gráficos? null en leads anteriores al campo. */
+  experience: string | null;
   email: string;
   country_code: string;
   dial_code: string;

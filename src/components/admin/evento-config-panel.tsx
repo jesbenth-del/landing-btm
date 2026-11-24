@@ -203,7 +203,8 @@ export function EventoConfigPanel({
 
           <p className="text-xs text-muted-foreground">
             Los leads que se registren desde que guardes quedan marcados con esta convocatoria. Los
-            anteriores conservan la suya.
+            anteriores conservan la suya. La fecha y la hora solo se muestran en la landing si la
+            variable SHOW_EVENT_DATE vale «true».
             {guardado?.actualizado
               ? ` Último cambio: ${dateFormatter.format(new Date(guardado.actualizado))}.`
               : " Todavía no se ha guardado aquí: estos valores salen de las variables de entorno."}

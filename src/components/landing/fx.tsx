@@ -99,6 +99,7 @@ export function WordReveal({
   /** Índice de la primera palabra, para encadenar varios WordReveal. */
   start?: number;
 }) {
+  if (!text.trim()) return null;
   return (
     // El degradado va en cada palabra: background-clip:text no atraviesa hijos
     // inline-block animados (cada uno crea su propia capa).

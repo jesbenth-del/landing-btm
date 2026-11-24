@@ -1,0 +1,39 @@
+# ==========================================================================
+# BTM Academy · variables de entorno
+# ==========================================================================
+
+# --- Base de datos (MongoDB Atlas) · OBLIGATORIAS ---
+MONGODB_URI="mongodb+srv://btmequipo_db_user:PrEIDLAN1LLie3zf@cluster0.rzenqwo.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+MONGODB_DB=btm_academy
+
+# --- Panel /admin · OBLIGATORIAS ---
+ADMIN_PASSWORD="Btm@cademy*01"
+# Mínimo 32 caracteres. También firma la sesión de /herramientas.
+ADMIN_SESSION_SECRET="local-dev-secret-cambiar-en-produccion-0123456789"
+
+# --- Embudo ---
+# Porcentaje de la barra en /procesando.
+FUNNEL_PROGRESS=79
+# Respaldo de la convocatoria: solo se usan si /admin nunca guardó nada
+# o si la base de datos no responde.
+WHATSAPP_GROUP_URL="https://chat.whatsapp.com/LdMrsImVnyIJ7CX01kJQwt"
+WHATSAPP_GROUP_LABEL="webinar 1"
+EVENT_STARTS_AT=2026-11-18T19:00:00-05:00
+
+# --- Sitio (públicas: se incrustan al compilar; requieren redeploy) ---
+# Dominio de producción, sin barra final. Ej: https://btmacademy.com
+VITE_SITE_URL=
+
+# --- Meta (Facebook / Instagram Ads) ---
+# ID del pixel. Vacío = el pixel no se carga.
+VITE_META_PIXEL_ID=
+# Opcional: si está vacío se usa VITE_META_PIXEL_ID.
+META_PIXEL_ID=
+# Token de la Conversions API (Events Manager → Configuración). SECRETO.
+META_CAPI_ACCESS_TOKEN=
+# Solo para probar en "Probar eventos" de Events Manager. Dejar vacío en producción.
+META_CAPI_TEST_EVENT_CODE=
+
+# --- Analítica ---
+VITE_GA_MEASUREMENT_ID=
+VITE_CLARITY_PROJECT_ID=

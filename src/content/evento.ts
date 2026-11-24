@@ -4,23 +4,28 @@
  * Todo el texto que cambia de una convocatoria a otra vive aquí, no en los
  * componentes: cambiar la oferta es editar este archivo. La fecha, la hora, el
  * nombre de la convocatoria y el grupo de WhatsApp NO van aquí: se editan en
- * /admin y la landing los lee en cada visita.
+ * /admin. La fecha y la hora solo se muestran en la landing cuando la variable
+ * de entorno SHOW_EVENT_DATE vale "true".
  *
- * TODO(copy): el contenido actual es el de la landing anterior adaptado a la
- * nueva estructura. Reemplazar con el copy definitivo.
+ * Reglas de redacción: decir «clase» (nunca «sesión»), «claridad» o
+ * «fundamento» (nunca «criterio») y «rango operativo» (nunca «rango» solo).
  */
 
-/** Las sesiones se anuncian en hora Colombia, que no tiene horario de verano. */
+/** Las clases se anuncian en hora Colombia, que no tiene horario de verano. */
 export const ZONA_HORARIA = {
   desfase: "-05:00",
   etiqueta: "Hora Colombia",
 } as const;
 
-/** Nombre del evento en los píxeles de Meta (navegador y Conversions API). */
+/**
+ * Nombre del evento en los píxeles de Meta (navegador y Conversions API).
+ * No se muestra en la página; cambiarlo parte los reportes de Meta en dos.
+ */
 export const EVENT_CONTENT_NAME = "Sesión Cero BTM";
 
 export const MARCA = {
   nombre: "BTM Academy",
+  // TODO(Jesús): confirmar si su nombre se escribe con tilde («Jesús»).
   mentor: "Jesus Bentham",
   rolMentor: "Fundador de BTM Academy",
 } as const;
@@ -34,116 +39,125 @@ export const NAV = [
 ] as const;
 
 export const SEO = {
-  title: "Sesión Cero BTM · Clase gratuita en vivo | BTM Academy",
+  title: "Deja de operar zonas sin contexto · Clase gratuita | BTM Academy",
   description:
-    "Clase gratuita en vivo con Jesus Bentham: las 4 leyes estructurales para validar zonas de alta probabilidad en Forex, Oro e Índices.",
+    "Clase gratuita de Sistema BTM: aprende a leer el contexto, ubicar el precio y construir un escenario antes de buscar una entrada.",
 } as const;
 
 export const HERO = {
-  /** Va antes de la fecha en la insignia: "Clase gratuita en vivo · 15 de noviembre". */
+  /** Va antes de la fecha en la insignia (la fecha solo aparece con SHOW_EVENT_DATE). */
   insignia: "Clase gratuita en vivo",
-  estado: "Cupos limitados",
+  /** Va en la cabecera de /procesando y /registro. */
+  estado: "100 % online",
   /** El titular se arma como: antes + resaltado + después. */
-  tituloAntes: "Entiende lo que",
-  tituloResaltado: "realmente mueve",
-  tituloDespues: "el mercado.",
+  tituloAntes: "Deja de operar",
+  tituloResaltado: "zonas sin contexto.",
+  tituloDespues: "",
   bajada:
-    "Deja de acumular conceptos aislados. En esta sesión en vivo aprendes a conectar estructura, contexto y validación para tomar decisiones con criterio en Forex, Oro e Índices.",
+    "Clase gratuita de Sistema BTM: aprende a leer el contexto, ubicar el precio y construir un escenario antes de buscar una entrada.",
   formularioTitulo: "Reserva tu cupo",
   formularioBajada: "Completa tus datos y te enviamos el acceso por WhatsApp.",
   botonFormulario: "Quiero mi cupo gratis",
   avisoFormulario:
-    "Al enviar aceptas unirte al grupo de WhatsApp y recibir ahí el acceso y los avisos de la sesión en vivo.",
-  /** Línea corta debajo del nombre del mentor en la tarjeta del héroe. */
-  credencialMentor: "Forex · Oro · Índices — sin señales ni promesas",
+    "Al enviar aceptas unirte al grupo de WhatsApp y recibir ahí el acceso y los avisos de la clase en vivo.",
+  /** Línea pequeña debajo del formulario cuando no se muestra la fecha. */
+  lineaSinFecha: "Evento 100 % online y gratuito",
 } as const;
 
-/**
- * Franja de credibilidad debajo del héroe. Texto ya formateado: se lee de un
- * vistazo y no se anima.
- *
- * TODO(copy): cambiar por cifras reales (alumnos, países, cohortes...).
- */
+/** Opciones de «¿Cuánto tiempo llevas analizando gráficos?» en el formulario. */
+export const EXPERIENCIA_OPCIONES = [
+  { value: "menos-6-meses", label: "Menos de 6 meses" },
+  { value: "6-meses-1-ano", label: "De 6 meses a 1 año" },
+  { value: "1-2-anos", label: "De 1 a 2 años" },
+  { value: "mas-2-anos", label: "Más de 2 años" },
+] as const;
+
+export type Experiencia = (typeof EXPERIENCIA_OPCIONES)[number]["value"];
+
+export const experienciaLabel = (value?: string | null) =>
+  EXPERIENCIA_OPCIONES.find((o) => o.value === value)?.label ?? "";
+
+/** Franja de credibilidad debajo del héroe. Texto ya formateado: no se anima. */
 export const PROOF_STATS = [
   { value: "FX · XAU · Índices", label: "Mercados que cubrimos" },
-  { value: "4", label: "Leyes estructurales" },
-  { value: "1:1", label: "Mentoría personalizada" },
+  { value: "Clase", label: "En vivo" },
+  { value: "100 %", label: "Online y gratuita" },
   { value: "0", label: "Señales o promesas de rentabilidad" },
 ] as const;
 
 export const AUDIENCIA = {
   eyebrow: "Identifícate",
-  titulo: "¿Para quién es la",
-  resaltado: "Sesión Cero BTM?",
+  titulo: "¿Para quién es",
+  resaltado: "esta clase?",
   intro:
-    "Es para ti si sientes que sabes muchas cosas de trading pero no tienes claridad. Aquí no venimos a darte señales ni a prometerte rentabilidades: te vamos a enseñar a leer el mercado con estructura, contexto y validación.",
-  cierre:
-    "En resumen: cualquier trader que ya haya explorado el mercado y quiera dejar de acumular conceptos sueltos para construir un marco claro y repetible.",
+    "Es para ti si sientes que sabes muchas cosas de trading pero no tienes claridad. Aquí no venimos a darte señales ni a prometerte rentabilidades: te vamos a enseñar a leer el mercado con estructura, contexto y fundamento.",
+  cierre: "No necesitas más conceptos. Necesitas conectarlos.",
   perfiles: [
     {
-      title: "Has visto cientos de videos de trading",
+      title: "Tu gráfico está lleno de zonas",
       description:
-        "Conoces muchos conceptos pero sigues confundido. Cada mentor enseña algo diferente y no sabes qué pieza va primero.",
+        "Marcas zonas por todos lados, pero no tienes claro dónde está realmente el precio.",
     },
     {
-      title: "Tu análisis cambia constantemente",
+      title: "No sabes cuáles zonas sirven",
       description:
-        "Lo que ves el lunes ya no te sirve el miércoles. Te falta un marco que te diga qué mirar y en qué orden.",
+        "Reconoces order blocks, FVG y quiebres de estructura, pero no tienes cómo decidir cuáles tienen sentido y cuáles descartar.",
     },
     {
-      title: "Dependes de indicadores o señales",
+      title: "El patrón se veía perfecto y falló",
       description:
-        "Saltas de una estrategia a otra buscando la que por fin funcione, sin entender el contexto en el que opera cada una.",
+        "La zona parecía correcta y aun así no funcionó. Faltaba entender dónde estaba el precio y qué contexto había.",
     },
     {
-      title: "Quieres criterio propio",
+      title: "Dudas al ejecutar",
       description:
-        "No buscas que te digan dónde entrar: quieres entender por qué, y construir una metodología que puedas repetir.",
+        "No siempre es por el resultado. A veces es que no tienes claro qué estás haciendo ni por qué.",
     },
   ],
 } as const;
 
 export const DIFERENCIA = {
-  titulo: "¿Por qué esta sesión es",
-  resaltado: "completamente distinta?",
+  titulo: "¿Qué cambia en",
+  resaltado: "esta clase?",
   /** Párrafo con fragmentos resaltados: cada objeto `{ mark }` va en color de acento. */
   parrafo: [
-    "El problema no es que existan pocos cursos de trading. El problema es que la mayoría enseña conceptos aislados. Nosotros enseñamos ",
-    { mark: "cómo conectar todas las piezas" },
-    " para interpretar el mercado con criterio: primero el ",
-    { mark: "contexto" },
-    ", luego la estructura y, solo al final, la entrada. Cuando entiendes el contexto, las entradas dejan de ser una adivinanza.",
+    "El problema no es que falte información. La mayoría de la formación enseña conceptos aislados. En esta clase verás ",
+    { mark: "cómo conectarlos" },
+    ": primero entiendes ",
+    { mark: "dónde está el precio" },
+    ", después construyes un escenario y, solo al final, buscas la entrada.",
   ],
-  boton: "Reservar mi cupo en vivo",
+  boton: "Quiero mi cupo gratis",
 } as const;
 
 export const APRENDIZAJES = {
-  eyebrow: "El plan de la sesión",
-  titulo: "Lo que vas a aprender en la",
-  resaltado: "Sesión Cero BTM",
-  cierreAntes: "Prepárate para dejar de acumular información y empezar a",
-  cierreResaltado: "operar con un marco claro",
-  cierreDespues: ".",
+  eyebrow: "El plan de la clase",
+  titulo: "Lo que vas a aprender en",
+  resaltado: "la clase",
+  cierreAntes: "Deja de acumular conceptos.",
+  cierreResaltado: "Aprende a conectarlos.",
+  cierreDespues: "",
+  // TODO(Jesús): los cuatro pasos deben coincidir con lo que enseñe en la clase.
   items: [
     {
-      title: "Comprender la estructura del mercado",
+      title: "Ubicar el precio",
       description:
-        "Identifica el esqueleto del precio antes de mirar cualquier indicador.",
+        "Entiende en qué rango operativo está y en qué parte de él, antes de elegir una zona.",
     },
     {
-      title: "Interpretar correctamente el contexto",
+      title: "Leer el contexto de arriba hacia abajo",
       description:
-        "Lee el momento del mercado para no operar contra la narrativa dominante.",
+        "Descubre cómo lo que ves en temporalidades menores cambia según la temporalidad mayor.",
     },
     {
-      title: "Validar zonas de alta probabilidad",
+      title: "Descartar zonas sin sentido",
       description:
-        "Aplica las 4 leyes estructurales para confirmar dónde merece la pena operar.",
+        "Aprende a decidir cuáles zonas tienen sentido en tu escenario y cuáles descartar.",
     },
     {
-      title: "Tomar decisiones con criterio",
+      title: "Construir un escenario completo",
       description:
-        "Ejecuta con un proceso definido, no con impulsos ni sesgos.",
+        "Define tu objetivo, qué necesitas que ocurra y qué lo invalida, y entiende por qué a veces no hay operación.",
     },
   ],
 } as const;
@@ -151,37 +165,33 @@ export const APRENDIZAJES = {
 export const MENTOR = {
   eyebrow: "Quién te va a enseñar",
   titulo: "¿Quién es",
-  resaltado: "Jesus Bentham?",
-  // TODO(copy): biografía real del mentor.
+  resaltado: `${MARCA.mentor}?`,
   puntos: [
     "Fundador de BTM Academy, una marca educativa enfocada en Forex, Oro (XAUUSD) e Índices.",
-    "Creador de una metodología que conecta estructura, contexto y validación en lugar de depender de indicadores aislados o estrategias memorizadas.",
-    "Acompaña a traders en mentoría 1:1 con diagnóstico individual, revisión continua de análisis y seguimiento de su operativa.",
+    "Creador del Sistema BTM, una metodología de análisis que conecta estructura, rangos operativos y contexto.",
+    "Enseña a traders a leer el contexto y a construir escenarios con condiciones claras.",
   ],
-  /** Cifras animadas. TODO(copy): cifras reales. */
-  stats: [
-    { value: 3, decimals: 0, suffix: "", label: "Mercados: Forex, Oro e Índices" },
-    { value: 4, decimals: 0, suffix: "", label: "Leyes estructurales del método" },
-    { value: 1, decimals: 0, suffix: ":1", label: "Mentoría personalizada" },
-  ],
+  /** Cifras animadas. Vacío = la fila de cifras no se muestra. */
+  stats: [] as readonly { value: number; decimals: number; suffix: string; label: string }[],
   destacadoTitulo: "Pero lo más importante es esto:",
   destacado:
-    "No te falta información. Te falta un mapa. La diferencia entre un trader que opera con miedo y uno que opera con criterio es el marco que usa para leer el mercado, y eso es exactamente lo que vas a construir.",
+    "No te falta información. Te falta conectarla. La diferencia entre un trader que duda y uno que opera con claridad está en cómo lee el mercado, y eso es lo que vas a empezar a construir.",
 } as const;
 
 export const FILTRO = {
   eyebrow: "Filtro honesto",
-  titulo: "¿Esta sesión es para ti?",
-  resaltado: "Revísalo con total honestidad",
+  titulo: "¿Esta clase es para ti?",
+  resaltado: "Revísalo con honestidad",
   boton: "Quiero mi cupo gratis",
+  /** Cada fila empareja un «NO es para ti» con un «SÍ es para ti». */
   filas: [
     {
       no: "Buscas señales para copiar o una promesa de rentabilidad.",
-      yes: "Quieres entender el mercado y desarrollar criterio propio.",
+      yes: "Quieres entender el mercado y desarrollar tu propia lectura.",
     },
     {
       no: "Prefieres saltar de una estrategia a otra hasta encontrar la mágica.",
-      yes: "Estás dispuesto a construir una metodología que puedas repetir.",
+      yes: "Estás dispuesto a construir un proceso de análisis que puedas repetir.",
     },
     {
       no: "Memorizas nombres de patrones sin entender el contexto.",
@@ -189,7 +199,11 @@ export const FILTRO = {
     },
     {
       no: "Esperas que un indicador tome las decisiones por ti.",
-      yes: "Quieres tomar decisiones con lógica estructurada.",
+      yes: "Quieres tomar decisiones con fundamento.",
+    },
+    {
+      no: "Estás empezando y aún no conoces las bases del análisis técnico.",
+      yes: "Ya conoces los conceptos básicos y quieres aprender a conectarlos.",
     },
   ],
 } as const;
@@ -198,80 +212,79 @@ export const FAQ_ITEMS = [
   {
     question: "¿Necesito experiencia previa en trading?",
     answer:
-      "No es imprescindible, pero sí ayuda haber explorado el mercado antes. Lo importante es que quieras dejar de acumular conceptos sueltos y construir un marco estructurado para operar Forex, Oro e Índices con criterio.",
+      "Sí. La clase está pensada para quien ya tiene bases de análisis técnico y conoce conceptos como order block, FVG o quiebre de estructura. No es una clase para empezar desde cero.",
   },
   {
-    question: "¿La sesión tiene algún costo?",
-    answer:
-      "No. La Sesión Cero BTM es gratuita y en vivo. El acceso y los avisos se envían por el grupo privado de WhatsApp al que te unes al registrarte.",
+    question: "¿La clase tiene algún costo?",
+    answer: "No. Es gratuita.",
   },
   {
     question: "¿Dan señales de trading o prometen rentabilidad?",
     answer:
-      "No. BTM Academy es una marca educativa. No vendemos señales ni garantizamos rentabilidades. Enseñamos a interpretar el mercado con estructura, contexto y validación para que desarrolles criterio propio.",
+      "No. Es formación educativa. No damos señales ni entradas para copiar, y no prometemos resultados. Operar implica riesgo.",
   },
   {
     question: "¿Qué mercados cubre la metodología?",
-    answer:
-      "La metodología se aplica a Forex, Oro (XAUUSD) e Índices. El enfoque es conectar estructura, contexto y validación en cualquiera de estos mercados, no depender de indicadores aislados ni de estrategias memorizadas.",
+    answer: "Los ejemplos de la clase son en Forex, oro (XAUUSD) e índices.",
   },
   {
-    question: "¿Qué pasa después de la sesión?",
+    question: "¿Qué pasa después de la clase?",
     answer:
-      "Si quieres seguir, te contaremos cómo funciona la Mentoría Personalizada: acompañamiento 1:1 con diagnóstico individual, revisión continua de análisis y seguimiento de tu operativa.",
+      "Al final, Jesús cuenta cómo seguir aprendiendo, por si quieres continuar. No tienes ninguna obligación.",
   },
 ] as const;
 
 /**
- * Sesiones del evento. `offsetDias` cuenta desde la fecha configurada en
+ * Clases del evento. `offsetDias` cuenta desde la fecha configurada en
  * /admin: 0 = ese mismo día, 1 = el día siguiente. Para un evento de dos días
- * basta con agregar una segunda sesión con `offsetDias: 1`.
+ * basta con agregar una segunda clase con `offsetDias: 1`.
  */
 export const AGENDA_BASE = [
   {
     offsetDias: 0,
-    badge: "Sesión en vivo",
-    title: "Las 4 leyes estructurales",
+    badge: "Clase en vivo",
+    title: "Ubica el precio y construye un escenario",
     description:
-      "Identifica el error que mantiene estancados a la mayoría de los traders, aprende a leer el contexto antes de operar y valida zonas de alta probabilidad sin depender de indicadores ni señales.",
+      "Aprende a leer el contexto, ubicar el precio y decidir qué zonas tienen sentido antes de buscar una entrada.",
   },
 ] as const;
 
 export const CIERRE = {
-  eyebrow: "Reserva la fecha",
-  tituloAntes: "Una sesión en vivo,",
-  tituloResaltado: "cero costo",
+  eyebrow: "Último paso",
+  tituloAntes: "Una clase en vivo,",
+  tituloResaltado: "gratis",
   boton: "Quiero mi cupo gratis",
-  aviso:
-    "Los cupos del grupo de WhatsApp son limitados. El acceso se entrega únicamente por ese canal.",
+  // TODO(Jesús): si el límite de cupos es real, decirlo aquí con la cifra.
+  aviso: "El acceso se entrega por WhatsApp.",
 } as const;
 
 export const STICKY = {
-  titulo: "Sesión Cero BTM · Gratis y en vivo",
-  bajada: "Cupos limitados en el grupo de WhatsApp",
+  titulo: "Clase gratuita · En vivo",
+  bajada: "El acceso se entrega por WhatsApp",
   boton: "Quiero mi cupo gratis",
 } as const;
 
+/** Paso 2 (justo después del registro): llevar al grupo de WhatsApp. */
 export const PROCESANDO = {
-  titulo: (nombre: string) => `${nombre}, tu cupo está casi confirmado`,
-  bajadaAntes: "Sigue este último paso obligatorio para garantizar tu acceso a la",
-  bajadaResaltado: "sesión en vivo",
-  bajadaDespues: "y recibir los materiales de trabajo.",
+  titulo: (nombre: string) => `${nombre}, ya estás registrado`,
+  texto:
+    "Entra al grupo para recibir el enlace de la clase y los recordatorios. La fecha y la hora de la clase se publicarán en el grupo.",
   checklist: [
-    { label: "Datos recibidos y verificados", done: true },
-    { label: "Cupo reservado para la sesión en vivo", done: true },
-    { label: "Acceso al grupo privado de WhatsApp", done: false },
+    { label: "Datos recibidos", done: true },
+    { label: "Cupo reservado para la clase en vivo", done: true },
+    { label: "Entrar al grupo de WhatsApp", done: false },
   ],
-  boton: "Unirme al grupo de WhatsApp",
+  boton: "Entrar al grupo de WhatsApp",
   notas: [
-    "Por este canal privado compartimos el enlace directo a la transmisión y el material de la sesión.",
+    "Por este canal compartimos el enlace directo a la transmisión y el material de la clase.",
     "El grupo es de solo lectura, administrado por nuestro equipo para respetar tu tiempo.",
   ],
 } as const;
 
+/** Paso 3: confirmación después de entrar al grupo. */
 export const REGISTRO = {
   texto: (nombre: string) =>
-    `Listo, ${nombre}. Tu cupo quedó confirmado y ya haces parte del grupo privado. Ahí te llega el enlace de la transmisión y el material de trabajo.`,
+    `Listo, ${nombre}. Ya estás registrado y en el grupo. Ahí recibirás el enlace de la clase y los recordatorios. La fecha y la hora de la clase se publicarán en el grupo.`,
   boton: "Abrir el grupo de WhatsApp",
 } as const;
 
