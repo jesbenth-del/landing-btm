@@ -27,7 +27,11 @@ interface LeadSubmission {
 
 export interface LeadDoc {
   firstName: string;
+  /** Vacío en los leads nuevos: el formulario ya no lo pide. */
   lastName: string;
+  /** ¿Cuánto tiempo llevas analizando gráficos? (ver EXPERIENCIA_OPCIONES) */
+  experience?: string;
+  formFillMs?: number;
   email: string;
   countryCode: string;
   dialCode: string;
@@ -74,6 +78,7 @@ const NO_CAMPANA = "__sin_campana__";
 export interface UpsertLeadInput {
   firstName: string;
   lastName: string;
+  experience?: string;
   email: string;
   countryCode: string;
   dialCode: string;
@@ -114,6 +119,7 @@ export async function upsertLead(input: UpsertLeadInput, isRetry = false): Promi
         $set: {
           firstName: input.firstName,
           lastName: input.lastName,
+          ...(input.experience ? { experience: input.experience } : {}),
           countryCode: input.countryCode,
           dialCode: input.dialCode,
           phoneNumber: input.phoneNumber,
@@ -264,7 +270,8 @@ function toAdminLead(doc: WithId<LeadDoc>): AdminLead {
   return {
     id: doc._id.toHexString(),
     first_name: doc.firstName,
-    last_name: doc.lastName,
+    last_name: doc.lastName ?? "",
+    experience: doc.experience ?? null,
     email: doc.email,
     country_code: doc.countryCode,
     dial_code: doc.dialCode,

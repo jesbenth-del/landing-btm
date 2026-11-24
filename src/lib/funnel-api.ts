@@ -1,7 +1,11 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 
-import { EVENT_CONTENT_NAME, PRIVACY_POLICY_VERSION } from "@/content/evento";
+import {
+  EVENT_CONTENT_NAME,
+  EXPERIENCIA_OPCIONES,
+  PRIVACY_POLICY_VERSION,
+} from "@/content/evento";
 import type { EventoPublico } from "@/lib/evento";
 
 import { eventoVigente, grupoActivo, progressPercentage } from "./server/funnel-config";
@@ -63,9 +67,17 @@ const nameField = z
   .max(80)
   .regex(/^[\p{L}\p{M}\s'-]+$/u);
 
+const EXPERIENCIA_VALUES = EXPERIENCIA_OPCIONES.map((o) => o.value) as [
+  (typeof EXPERIENCIA_OPCIONES)[number]["value"],
+  ...(typeof EXPERIENCIA_OPCIONES)[number]["value"][],
+];
+
 const createLeadSchema = z.object({
   firstName: nameField,
-  lastName: nameField,
+  /** El formulario ya no lo pide; se acepta por compatibilidad. */
+  lastName: nameField.optional().or(z.literal("")),
+  /** ¿Cuánto tiempo llevas analizando gráficos? */
+  experience: z.enum(EXPERIENCIA_VALUES).optional(),
   email: z.string().trim().toLowerCase().email().max(254),
   countryCode: z
     .string()
@@ -98,7 +110,8 @@ export const createLead = createServerFn({ method: "POST" })
     try {
       lead = await upsertLead({
         firstName: data.firstName,
-        lastName: data.lastName,
+        lastName: data.lastName ?? "",
+        experience: data.experience,
         email: data.email,
         countryCode: data.countryCode,
         dialCode: data.dialCode,
@@ -194,10 +207,19 @@ export const advanceLeadStage = createServerFn({ method: "POST" })
     return { ok: true, firstTime };
   });
 
-/** Lo que la landing necesita en cada visita: fecha, hora y zona. Público. */
+/**
+ * Lo que la landing necesita en cada visita: fecha, hora y zona. Público.
+ *
+ * La fecha sigue guardada (en /admin o en EVENT_STARTS_AT), pero solo se
+ * publica cuando SHOW_EVENT_DATE vale "true". Sin ella la landing no muestra
+ * fecha, hora ni cuenta regresiva.
+ */
 export const getEventoPublico = createServerFn({ method: "GET" }).handler(
   async (): Promise<EventoPublico> => {
     const evento = await eventoVigente();
+    if (process.env.SHOW_EVENT_DATE?.trim().toLowerCase() !== "true") {
+      return { inicio: "", hora: "", zona: evento.zona };
+    }
     return { inicio: evento.inicio, hora: evento.hora, zona: evento.zona };
   },
 );

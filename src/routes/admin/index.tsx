@@ -2,6 +2,7 @@ import { createFileRoute, redirect, useNavigate } from "@tanstack/react-router";
 import { Fragment, useCallback, useEffect, useState } from "react";
 
 import { AdminHeader } from "@/components/admin/admin-header";
+import { experienciaLabel } from "@/content/evento";
 import {
   adminInputClass,
   adminLabelClass,
@@ -29,6 +30,7 @@ import {
   countryName,
   dateFormatter,
   EXPORT_COLUMNS as COLUMNS,
+  fullName,
   originOf,
   STAGE_LABELS,
   UTM_KEYS,
@@ -520,8 +522,10 @@ function AdminDashboardPage() {
                         <td className={`${cell} text-foreground/80`}>
                           {dateFormatter.format(new Date(lead.last_submitted_at))}
                         </td>
-                        <td className={cell}>{lead.first_name}</td>
-                        <td className={cell}>{lead.last_name}</td>
+                        <td className={cell}>{fullName(lead)}</td>
+                        <td className={`${cell} text-foreground/80`}>
+                          {experienciaLabel(lead.experience) || "—"}
+                        </td>
                         <td className={`${cell} text-foreground/80`}>{lead.email}</td>
                         <td className={`${cell} text-foreground/80`}>
                           {lead.dial_code} {lead.phone_number}

@@ -210,14 +210,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "Formación premium en Forex, Oro e Índices. Una metodología clara para conectar estructura, contexto y validación. Sin promesas, con criterio.",
+          "Formación premium en Forex, Oro e Índices. Una metodología clara para conectar estructura, contexto y validación. Sin promesas, con claridad.",
       },
       { name: "author", content: "BTM Academy" },
       { property: "og:title", content: "BTM Academy — Entiende lo que mueve el mercado" },
       {
         property: "og:description",
         content:
-          "Formación premium en Forex, Oro e Índices. Una metodología clara para conectar estructura, contexto y validación. Sin promesas, con criterio.",
+          "Formación premium en Forex, Oro e Índices. Una metodología clara para conectar estructura, contexto y validación. Sin promesas, con claridad.",
       },
       { property: "og:type", content: "website" },
       { property: "og:image", content: ogImage },
@@ -232,7 +232,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "twitter:description",
         content:
-          "Formación premium en Forex, Oro e Índices. Una metodología clara para conectar estructura, contexto y validación. Sin promesas, con criterio.",
+          "Formación premium en Forex, Oro e Índices. Una metodología clara para conectar estructura, contexto y validación. Sin promesas, con claridad.",
       },
       { name: "twitter:image", content: ogImage },
     ],

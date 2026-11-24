@@ -102,14 +102,14 @@ export function AudienceSection() {
         })}
       </div>
 
-      <p className="mx-auto mt-14 max-w-2xl text-center text-base leading-relaxed text-pretty text-white/50">
+      <p className="mx-auto mt-14 max-w-2xl text-center text-xl leading-snug font-medium tracking-tight text-balance text-white/85 sm:text-2xl">
         {AUDIENCIA.cierre}
       </p>
     </Band>
   );
 }
 
-/* ---------- 4. Por qué esta sesión y no otra ---------- */
+/* ---------- 4. Qué cambia en esta clase ---------- */
 
 export function DifferenceSection() {
   return (
@@ -286,11 +286,13 @@ export function MentorSection() {
               </Reveal>
             ))}
           </ul>
-          <div className="mt-10 grid grid-cols-3 gap-3">
-            {MENTOR.stats.map((stat) => (
-              <MentorStat key={stat.label} {...stat} />
-            ))}
-          </div>
+          {MENTOR.stats.length > 0 && (
+            <div className="mt-10 grid grid-cols-3 gap-3">
+              {MENTOR.stats.map((stat) => (
+                <MentorStat key={stat.label} {...stat} />
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
@@ -418,11 +420,11 @@ export function FinalCtaSection({ evento }: { evento: TextosDelEvento }) {
             <span className="text-fade">{CIERRE.tituloAntes}</span>{" "}
             <span className="text-shimmer">{CIERRE.tituloResaltado}</span>
           </h2>
-          <p className="mt-6 font-mono text-sm text-white/50 sm:text-base">
-            {evento.hasDate
-              ? `${evento.dates} · ${evento.time} · ${evento.timezone}`
-              : "Fecha por confirmar"}
-          </p>
+          {evento.hasDate && (
+            <p className="mt-6 font-mono text-sm text-white/50 sm:text-base">
+              {`${evento.dates} · ${evento.time} · ${evento.timezone}`}
+            </p>
+          )}
         </div>
 
         <div
@@ -436,7 +438,7 @@ export function FinalCtaSection({ evento }: { evento: TextosDelEvento }) {
                     {index + 1}
                   </span>
                   <p className="text-xs tracking-[0.2em] text-primary uppercase">
-                    {item.badge} · {item.day}
+                    {item.day ? `${item.badge} · ${item.day}` : item.badge}
                   </p>
                 </div>
                 <h3 className="mt-6 text-2xl leading-tight font-semibold tracking-tight sm:text-3xl">

@@ -1,4 +1,4 @@
-import { AGENDA_BASE, ZONA_HORARIA } from "@/content/evento";
+import { AGENDA_BASE, HERO, ZONA_HORARIA } from "@/content/evento";
 
 /** Lo que la landing necesita de la convocatoria vigente (público). */
 export interface EventoPublico {
@@ -103,11 +103,12 @@ export function textosDelEvento(evento: EventoPublico) {
     dates,
     hasDate: dias.length > 0,
     datesLine: dias.length
-      ? `Evento 100% online y gratuito | ${dates} a las ${evento.hora} (${evento.zona})`
-      : "Evento 100% online y gratuito | Fecha por confirmar",
-    agenda: AGENDA_BASE.map((sesion) => {
-      const d = diaDelEvento(evento.inicio, sesion.offsetDias);
-      return { ...sesion, day: d ? formatDay(d) : "Fecha por confirmar" };
+      ? `${HERO.lineaSinFecha} | ${dates} a las ${evento.hora} (${evento.zona})`
+      : HERO.lineaSinFecha,
+    /** `day` vacío cuando no se publica la fecha: la tarjeta muestra solo la etiqueta. */
+    agenda: AGENDA_BASE.map((clase) => {
+      const d = diaDelEvento(evento.inicio, clase.offsetDias);
+      return { ...clase, day: d ? formatDay(d) : "" };
     }),
   };
 }

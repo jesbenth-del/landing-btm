@@ -89,13 +89,22 @@ function ProcesandoPage() {
           {PROCESANDO.titulo(session.firstName)}
         </h1>
 
-        <p className="mt-4 text-base text-muted-foreground">
-          {PROCESANDO.bajadaAntes}{" "}
-          <span className="font-semibold text-primary">{PROCESANDO.bajadaResaltado}</span>{" "}
-          {PROCESANDO.bajadaDespues}
-        </p>
+        <p className="mt-4 text-base text-muted-foreground sm:text-lg">{PROCESANDO.texto}</p>
 
+        {/* Lo primero que tiene que hacer: entrar al grupo. Botón grande, arriba. */}
         <div className="mt-8">
+          <CtaButton
+            variant="whatsapp"
+            onClick={handleJoin}
+            loading={isJoining}
+            className="h-16 text-base sm:text-lg"
+          >
+            <WhatsappIcon className="size-6" />
+            {PROCESANDO.boton}
+          </CtaButton>
+        </div>
+
+        <div className="mt-10">
           <ProgressBar value={session.progressPercentage} label="Registro completado" />
         </div>
 
@@ -122,13 +131,6 @@ function ProcesandoPage() {
             </li>
           ))}
         </ul>
-
-        <div className="mt-8">
-          <CtaButton variant="whatsapp" onClick={handleJoin} loading={isJoining}>
-            <WhatsappIcon />
-            {PROCESANDO.boton}
-          </CtaButton>
-        </div>
 
         <ul className="mt-6 flex flex-col gap-2 text-xs leading-relaxed text-muted-foreground">
           {PROCESANDO.notas.map((nota) => (

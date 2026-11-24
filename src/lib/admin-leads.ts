@@ -1,6 +1,12 @@
+import { experienciaLabel } from "@/content/evento";
+
 import type { AdminLead } from "./admin-api";
 import { COUNTRIES } from "./countries";
 import type { LeadStage } from "./funnel-api";
+
+/** Nombre y, si existe (leads anteriores al cambio del formulario), apellido. */
+export const fullName = (lead: AdminLead) =>
+  [lead.first_name, lead.last_name].filter(Boolean).join(" ");
 
 export const UTM_KEYS = [
   "utm_source",
@@ -26,7 +32,7 @@ export const EXPORT_COLUMNS = [
   "Inscripciones",
   "Última inscripción",
   "Nombre",
-  "Apellido",
+  "Experiencia",
   "Correo",
   "Teléfono",
   "País",
@@ -67,8 +73,8 @@ export function toExportRow(lead: AdminLead): string[] {
     STAGE_LABELS[lead.stage] ?? lead.stage,
     String(lead.submission_count),
     lead.last_submitted_at ? dateFormatter.format(new Date(lead.last_submitted_at)) : "",
-    lead.first_name,
-    lead.last_name,
+    fullName(lead),
+    experienciaLabel(lead.experience),
     lead.email,
     `${lead.dial_code} ${lead.phone_number}`,
     countryName(lead.country_code),
